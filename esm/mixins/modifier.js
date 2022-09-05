@@ -5,7 +5,7 @@ import { compose } from '../util.js';
 const MODIFIER = 'modifier';
 
 const updateModifier = function () {
-  this.shadowRoot?.querySelector('slot').assignedNodes()
+  this.shadowRoot?.querySelector('slot')?.assignedNodes()
     .filter(e => e.tagName && e.tagName.startsWith('ONS-'))
     .forEach(e => e[MODIFIER] = this[MODIFIER]);
 };
@@ -25,7 +25,7 @@ const modifierBase = Base => class extends Base {
   constructor() {
     super();
     this.shadowRoot?.querySelector('slot')
-      .addEventListener('slotchange', updateModifier.bind(this));
+      ?.addEventListener('slotchange', updateModifier.bind(this));
   }
 };
 
