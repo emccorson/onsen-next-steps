@@ -279,3 +279,16 @@ h4, h5, h6 {
     border-color: var(--blend-border-color__color);
   }
 }
+
+
+/* css-components-src/components/toolbar.css */
+
+:root {
+  --toolbar-separator-color: var(--toolbar-border-color);
+
+  --toolbar-height: 44px;
+  --toolbar-box-shadow: none;
+  --toolbar-padding: 0;
+  --toolbar-separator: 1px solid var(--toolbar-separator-color);
+  --toolbar-material-height: 56px;
+}

@@ -2,8 +2,11 @@ import { compose } from '../../util.js';
 import { withModifier } from '../../mixins/modifier.js';
 import { withTemplate } from '../../mixins/template.js';
 
+import css from './css.js';
+
 const template = document.createElement('template');
 template.innerHTML = `
+  <style>${css}</style>
   <div part="left">
     <slot name="left"></slot>
   </div>
