@@ -1,7 +1,7 @@
-import { compose } from '../util.js';
-import { withTemplate } from '../mixins/template.js';
-import { withModifier } from '../mixins/modifier.js';
-import { ACTIVE, PAGE } from './tab.js';
+import { compose } from '../../util.js';
+import { withTemplate } from '../../mixins/template.js';
+import { withModifier } from '../../mixins/modifier.js';
+import { ACTIVE, PAGE } from '../tab/index.js';
 
 const template = document.createElement('template');
 template.innerHTML = `

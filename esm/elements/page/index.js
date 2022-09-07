@@ -1,6 +1,6 @@
-import { compose } from '../util.js';
-import { withTemplate } from '../mixins/template.js';
-import { withModifier } from '../mixins/modifier.js';
+import { compose } from '../../util.js';
+import { withTemplate } from '../../mixins/template.js';
+import { withModifier } from '../../mixins/modifier.js';
 
 const template = document.createElement('template');
 template.innerHTML = `

@@ -1,8 +1,8 @@
-import { compose } from '../util.js';
-import { withTemplate } from '../mixins/template.js';
-import { withModifier } from '../mixins/modifier.js';
-import { withStringProperty, withBooleanProperty } from '../mixins/property.js';
-import { withEffect } from '../mixins/effect.js';
+import { compose } from '../../util.js';
+import { withTemplate } from '../../mixins/template.js';
+import { withModifier } from '../../mixins/modifier.js';
+import { withStringProperty, withBooleanProperty } from '../../mixins/property.js';
+import { withEffect } from '../../mixins/effect.js';
 
 const PAGE = 'page';
 
