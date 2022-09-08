@@ -292,3 +292,20 @@ h4, h5, h6 {
   --toolbar-separator: 1px solid var(--toolbar-separator-color);
   --toolbar-material-height: 56px;
 }
+
+
+/* css-components-src/components/tabbar.css */
+
+:root {
+  --tabbar-button-color: var(--tabbar-text-color); /* Text color */
+  --tabbar-active-color: var(--tabbar-highlight-text-color); /* Text color active */
+  --material-tabbar-current-color: var(--material-tabbar-highlight-text-color);
+  --tabbar-active-border-top: none;
+  --tabbar-focus-border-top: none;
+  --tabbar-height: 49px;
+  --tabbar-button-line-height: 49px;
+  --tabbar-button-border: none;
+  --tabbar-active-box-shadow: none;
+  --tabbar-button-focus-box-shadow: none;
+  --tabbar-border-top: 1px solid var(--tabbar-border-color);
+}

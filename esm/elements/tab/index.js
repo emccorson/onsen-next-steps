@@ -4,11 +4,14 @@ import { withModifier } from '../../mixins/modifier.js';
 import { withStringProperty, withBooleanProperty } from '../../mixins/property.js';
 import { withEffect } from '../../mixins/effect.js';
 
+import css from './css.js';
+
 const PAGE = 'page';
 
 const template = document.createElement('template');
 template.innerHTML = `
-  <input type="radio" hidden></input>
+  <style>${css}</style>
+  <input id="input" type="radio" hidden></input>
   <button part="button">
     <div id="label"></div>
   </button>

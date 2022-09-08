@@ -3,11 +3,14 @@ import { withTemplate } from '../../mixins/template.js';
 import { withModifier } from '../../mixins/modifier.js';
 import { ACTIVE, PAGE } from '../tab/index.js';
 
+import css from './css.js';
+
 const template = document.createElement('template');
 template.innerHTML = `
+  <style>${css}</style>
   <div part="content" id="content">
   </div>
-  <div>
+  <div part="footer" id="footer">
     <slot></slot>
   </div>
 `;
