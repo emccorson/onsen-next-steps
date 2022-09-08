@@ -53,4 +53,31 @@ export default `
     0 5px 1px -4px rgba(0, 0, 0, 0.2);
 }
 
+
+/* swiper.css */
+
+/* .ons-swiper { */
+#content {
+  overflow: hidden;
+  display: block;
+  box-sizing: border-box;
+}
+
+/* .ons-swiper-target { */
+#swiper-target {
+  display: flex;
+  height: 100%;
+  z-index: 1;
+  flex-direction: row;
+}
+
+/* .ons-swiper-target > * { */
+#swiper-target > * {
+  height: inherit;
+  flex-shrink: 0;
+  box-sizing: border-box;
+  width: 100%;
+  position: relative !important;
+}
+
 `;

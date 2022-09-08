@@ -46,4 +46,27 @@ const withBooleanProperty = property => {
   return withProperty(getter, setter, property);
 };
 
-export { withProperty, withStringProperty, withBooleanProperty };
+const withEnumProperty = (property, values) => {
+  const defaultValue = values[0];
+
+  const getter = function () {
+    const attribute = this.getAttribute(property);
+    if (values.includes(attribute)) {
+      return attribute;
+    } else {
+      return defaultValue;
+    }
+  };
+
+  const setter = function (value) {
+    if (values.includes(value)) {
+      this.setAttribute(property, value);
+    } else {
+      this.setAttribute(property, defaultValue);
+    }
+  }
+
+  return withProperty(getter, setter, property);
+};
+
+export { withProperty, withStringProperty, withBooleanProperty, withEnumProperty };
