@@ -123,8 +123,8 @@ arguments should be separate from the base class argument:
 We start with a base Custom Element that does **nothing**:
 
     class Base extends HTMLElement {
-      connectedCallback { }
-      disconnectedCallback { }
+      connectedCallback() { }
+      disconnectedCallback() { }
       attributeChangedCallback() { }
     }
 
