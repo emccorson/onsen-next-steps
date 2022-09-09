@@ -170,3 +170,129 @@ See also:
 [2]: https://github.com/emccorson/onsen-next-steps/blob/master/esm/util.js
 [3]: https://github.com/emccorson/onsen-next-steps/blob/master/esm/mixins
 [4]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes#mix-ins
+
+
+Shadow DOM
+----------
+
+### Custom Elements polyfill
+Onsen UI v2 uses a polyfill to add Custom Element support. At the time the
+polyfill was added, Custom Elements were not well supported in browsers, so a
+polyfill was needed.
+
+Nowadays, Custom Elements are [well supported][5] in modern browsers, so we
+should be able to remove the polyfill.
+
+However, the polyfill allowed us to write code that is not allowed in the Custom
+Elements specification (and therefore not allowed by browsers), so it is not
+simple to just remove the polyfill.
+
+For example, the Custom Elements specification [disallows][6] inspecting an
+element's attributes or children in the constructor, but we do this regularly in
+the code. Without the polyfill, the browser will throw an exception.
+
+### `contentReady`
+Often what we are doing in the constructor of an Onsen UI element is compiling
+the element's children, by checking what children have been set by the user, and
+adding/removing children as necessary.
+
+The constructor calls `contentReady`, which waits for the element to be "ready"
+for compilation (i.e. the child elements have finished loading), and then
+compiles the element (manipulates the child elements).
+
+One problem with `contentReady` is that it considers an element to be ready if
+it has any child elements. But in the case where Onsen UI is loaded as an ES
+module (without the polyfill), there will be child elements before the content
+is ready.
+
+Actually, the concept of an element being "ready" does [not particularly make
+sense][8] for Custom Elements. Custom Elements should be dynamic - the user should be
+able to add or remove children at any time - but it is difficult to make Onsen
+UI dynamic while using `contentReady`.
+
+See also:
+
+  - The [component compilation][7] explanation in the Onsen UI guide.
+
+### Shadow DOM and templates
+My suggestion is that we use the Shadow DOM in Onsen UI v3.
+
+In brief, the Light DOM refers to DOM elements accessible by the user, such as
+an `ons-tab` element. The Shadow DOM refers to the DOM elements that are
+internal to a Custom Element and are not accessible by the user.
+
+By using the Shadow DOM, we can write the DOM structure of an Onsen UI element
+as a **template**. For example, `ons-page` could be:
+
+    document.createElement('template');
+    template.innerHTML = `
+      <div part="content">
+        <slot></slot>
+      </div>
+      <div part="background"></div>
+    `;
+
+The template is internal to the component; the user cannot access it. Whereas in
+v2 we have to write a `_compile` method that manipulates the Light DOM, here we
+can just write the template in the Shadow DOM knowing that it won't be
+manipulated by the user.
+
+This greatly simplifies the compilation of Onsen UI elements, and makes it much
+easier for them to be dynamic.
+
+### Slots
+In v2, the most basic way to use an element is to put text between its tags:
+
+    <ons-toolbar>My page</ons-toolbar>
+
+If the user wants more control, he can provide children which structure the layout:
+
+    <ons-toolbar>
+      <div class="left">Left content</div>
+      <div class="center">My page</div>
+      <div class="right">Right content</div>
+    </ons-toolbar>
+
+Using the Shadow DOM, we can provide a similar level of control to the user with
+**slots**. A slot is a place in the Shadow DOM template where the user can insert
+his own content.
+
+In this case, the ons-toolbar template would be:
+
+    <div class="left">
+      <slot name="left"></slot>
+    </div>
+    <div class="center">
+      <slot name="center"></slot>
+      <slot></slot>                 <---- the default slot
+    </div>
+    <div class="right">
+      <slot name="right"></slot>
+    </div>
+
+Now the user can still use the basic text markup:
+
+    <ons-toolbar>My page</ons-toolbar>
+
+If he wants more control, he can use the `slot` attribute instead of the `class`
+attribute.
+
+    <ons-toolbar>
+      <div slot="left">Left content</div>
+      <div slot="center">My page</div>
+      <div slot="right">Right content</div>
+    </ons-toolbar>
+
+In this way, we can use templates while still offering the same level of control
+over Onsen UI elements to the user.
+
+See also:
+
+  - [Using templates and slots][9] MDN article.
+
+
+[5]: https://caniuse.com/custom-elementsv1
+[6]: https://html.spec.whatwg.org/multipage/custom-elements.html#custom-element-conformance
+[7]: https://onsen.io/v2/guide/compilation.html#components-compilation
+[8]: https://github.com/WICG/webcomponents/issues/551#issuecomment-241830839
+[9]: https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_templates_and_slots
