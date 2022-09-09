@@ -181,7 +181,9 @@ polyfill was added, Custom Elements were not well supported in browsers, so a
 polyfill was needed.
 
 Nowadays, Custom Elements are [well supported][5] in modern browsers, so we
-should be able to remove the polyfill.
+should be able to remove the polyfill. It is important to remove the polyfill
+because in [some cases][10] it has prevented users from using Onsen UI with other
+Custom Element libraries.
 
 However, the polyfill allowed us to write code that is not allowed in the Custom
 Elements specification (and therefore not allowed by browsers), so it is not
@@ -290,9 +292,52 @@ See also:
 
   - [Using templates and slots][9] MDN article.
 
+### CSS
+CSS works a bit differently in the Shadow DOM. Custom Elements that use the
+Shadow DOM have their own CSS and are not affected (in general) by global CSS
+rules. In short, this means that the current approach of including the Onsen UI
+CSS in the head of an HTML file will not work. Instead, a component's CSS should
+be included inline in its template:
 
-[5]: https://caniuse.com/custom-elementsv1
-[6]: https://html.spec.whatwg.org/multipage/custom-elements.html#custom-element-conformance
-[7]: https://onsen.io/v2/guide/compilation.html#components-compilation
-[8]: https://github.com/WICG/webcomponents/issues/551#issuecomment-241830839
-[9]: https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_templates_and_slots
+    <style>
+      /* component-specific CSS rules here */
+    <style>
+    <div id="content">
+      <slot></slot>
+    </div>
+    <div id="background"></div>
+
+#### CSS vs. PostCSS
+In preparation for the Shadow DOM (and to simplify the Onsen UI build process),
+I have mostly removed any CSS processing with PostCSS from the project. In
+general, it seemed that the added maintenance overhead of using PostCSS was not
+worth the benefit. The current situation is that PostCSS is still used for some
+small tasks but is mostly removed.
+
+Writing the CSS inline in the Shadow DOM templates will make it more difficult
+to apply any CSS processing to the CSS. I do not have concrete a recommendation
+for this yet, but there are two possibilities:
+
+  1. Remove the remaining PostCSS processing from the project and write using
+     only plain CSS from now on.
+
+  2. Use a plugin such as [rollup-plugin-import-css][11] to insert the CSS
+     into the template after it has been processed by PostCSS.
+
+My feeling is that the benefit of processing tools can be easily overrated and
+that it is better to write in plain JS/CSS as much as possible. If we write in
+plain JS/CSS:
+
+  - There is no need for a build step.
+  - There is no need to maintain build dependencies.
+  - It is much easier for other people to understand the code.
+
+But this is just my personal preference and I have no strong recommendation.
+
+[5]:  https://caniuse.com/custom-elementsv1
+[6]:  https://html.spec.whatwg.org/multipage/custom-elements.html#custom-element-conformance
+[7]:  https://onsen.io/v2/guide/compilation.html#components-compilation
+[8]:  https://github.com/WICG/webcomponents/issues/551#issuecomment-241830839
+[9]:  https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_templates_and_slots
+[10]: https://github.com/OnsenUI/OnsenUI/issues/2598
+[11]: https://github.com/jleeson/rollup-plugin-import-css
