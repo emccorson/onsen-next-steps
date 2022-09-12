@@ -531,8 +531,8 @@ for an example implementation.
 
 
 [1]:  https://web.dev/custom-elements-best-practices/
-[2]:  https://github.com/emccorson/onsen-next-steps/blob/master/esm/util.js
-[3]:  https://github.com/emccorson/onsen-next-steps/blob/master/esm/mixins
+[2]:  https://github.com/OnsenUI/onsen-next-steps/blob/master/esm/util.js
+[3]:  https://github.com/OnsenUI/onsen-next-steps/blob/master/esm/mixins
 [4]:  https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes#mix-ins
 [5]:  https://caniuse.com/custom-elementsv1
 [6]:  https://html.spec.whatwg.org/multipage/custom-elements.html#custom-element-conformance
@@ -543,5 +543,5 @@ for an example implementation.
 [11]: https://github.com/jleeson/rollup-plugin-import-css
 [12]: https://github.com/OnsenUI/OnsenUI/issues/2645
 [13]: https://developer.mozilla.org/en-US/docs/Web/API/HTMLSlotElement/slotchange_event
-[14]: https://github.com/emccorson/onsen-next-steps/blob/master/esm/elements/tab/index.js
-[15]: https://github.com/emccorson/onsen-next-steps/blob/master/esm/elements/tabbar/index.js
+[14]: https://github.com/OnsenUI/onsen-next-steps/blob/master/esm/elements/tab/index.js
+[15]: https://github.com/OnsenUI/onsen-next-steps/blob/master/esm/elements/tabbar/index.js
