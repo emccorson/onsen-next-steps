@@ -1,6 +1,21 @@
 ONSEN UI NEXT STEPS
 ===================
 
+1. Introduction
+2. Mixins
+3. Shadow DOM
+   1. Custom Elements polyfill
+   2. Shadow DOM and templates
+   3. Slots
+   4. CSS
+      1. CSS Custom Properties
+      2. CSS namespaces
+      3. CSS vs. PostCSS
+      4. CSS Components project
+
+Introduction
+------------
+
 This document contains suggestions for the next release of Onsen UI.
 
 My main suggestion is that we do a major release of Onsen UI v3. There are some
@@ -336,7 +351,7 @@ The file should be placed in the HTML by the user:
 
 Other theme files can be called `dark-onsenui.css`, `old-onsenui.css` etc.
 
-#### CSS Namespaces
+#### CSS namespaces
 One issue with Onsen UI v2 is that the Onsen UI CSS can [cause conflicts][12]
 with the user's own CSS.
 
@@ -407,6 +422,8 @@ plain JS/CSS:
   - It is much easier for other people to understand the code.
 
 But this is just my personal preference and I have no strong recommendation.
+
+#### CSS Components project
 
 [5]:  https://caniuse.com/custom-elementsv1
 [6]:  https://html.spec.whatwg.org/multipage/custom-elements.html#custom-element-conformance
