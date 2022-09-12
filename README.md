@@ -1,18 +1,19 @@
-ONSEN UI NEXT STEPS
+Onsen UI next steps
 ===================
 
-1. Introduction
-2. Mixins
-3. Shadow DOM
-   1. Custom Elements polyfill
-   2. Shadow DOM and templates
-   3. Slots
-4. CSS
-   1. CSS Custom Properties
-   2. CSS namespaces
-   3. CSS vs. PostCSS
-   4. CSS Components project
-   5. Icons
+1. [Introduction](#introduction)
+2. [Mixins](#mixins)
+3. [Shadow DOM](#shadow-dom)
+   1. [Custom Elements polyfill](#custom-elements-polyfill)
+   2. [`contentReady`](#contentready)
+   3. [Shadow DOM and templates](#shadow-dom-and-templates)
+   4. [Slots](#slots)
+4. [CSS](#css)
+   1. [CSS Custom Properties](#css-custom-properties)
+   2. [CSS namespaces](#css-namespaces)
+   3. [CSS vs. PostCSS](#css-vs-postcss)
+   4. [CSS Components project](#css-components-project)
+   5. [Icons](#icons)
 
 Introduction
 ------------
@@ -57,8 +58,6 @@ In order to fix these problems, I suggest we do the following:
   3. Write the custom elements in a mixin style. This will allow for separation
   of concerns and much easier code re-use, improving consistency for users and
   maintainability.
-
-
 
 
 Mixins
