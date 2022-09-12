@@ -16,6 +16,7 @@ Onsen UI next steps
    3. [CSS vs. PostCSS](#css-vs-postcss)
    4. [CSS Components project](#css-components-project)
    5. [Icons](#icons)
+5. [Parent/child communication](#parentchild-communication)
 
 Introduction
 ------------
@@ -500,6 +501,34 @@ is applied to the Custom Element itself (e.g. `ons-tab`) instead of some inner
 element (e.g. `div.tabbar__icon`).
 
 
+Parent/child communication
+--------------------------
+Some Onsen UI elements are dependent on each other. For example, ons-tabbar
+depends on having ons-tab children.
+
+There needs to be some communcation between parents and children, but at the
+moment we don't do this in a very consistent way. Currently, ons-tab looks for a
+parent ons-tabbar and uses its methods and properties. In this way, the child is
+manipulating the parent.
+
+This can make the code quite complicated. I suggest we follow the Vue style:
+
+  1. A parent communicates with a child by setting the child's properties. Since
+     we are following [Custom Elements Best Practices][1], most functionality on
+     the child should be available to use as a property.
+
+  2. A child communicates with a parent by emitting an event. This does **not**
+     necessarily follow [Custom Elements Best Practices][1] because the event
+     may be emitted due to the parent setting a property. Best Practices
+     recommends not to do this because there is a danger of entering an endless
+     loop (parent sets property -> child emits event -> parent sets property
+     etc.). To counter this, I suggest we make these kinds of events **private**
+     by prefixing them with `_` and not publicly documenting them e.g.
+     `_active`.
+
+See the demo [tab][14] and [tabbar][15] elements' use of the `_active_` event
+for an example implementation.
+
 
 [1]:  https://web.dev/custom-elements-best-practices/
 [2]:  https://github.com/emccorson/onsen-next-steps/blob/master/esm/util.js
@@ -514,3 +543,5 @@ element (e.g. `div.tabbar__icon`).
 [11]: https://github.com/jleeson/rollup-plugin-import-css
 [12]: https://github.com/OnsenUI/OnsenUI/issues/2645
 [13]: https://developer.mozilla.org/en-US/docs/Web/API/HTMLSlotElement/slotchange_event
+[14]: https://github.com/emccorson/onsen-next-steps/blob/master/esm/elements/tab/index.js
+[15]: https://github.com/emccorson/onsen-next-steps/blob/master/esm/elements/tabbar/index.js
