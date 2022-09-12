@@ -7,11 +7,12 @@ ONSEN UI NEXT STEPS
    1. Custom Elements polyfill
    2. Shadow DOM and templates
    3. Slots
-   4. CSS
-      1. CSS Custom Properties
-      2. CSS namespaces
-      3. CSS vs. PostCSS
-      4. CSS Components project
+4. CSS
+   1. CSS Custom Properties
+   2. CSS namespaces
+   3. CSS vs. PostCSS
+   4. CSS Components project
+   5. Icons
 
 Introduction
 ------------
@@ -58,7 +59,6 @@ In order to fix these problems, I suggest we do the following:
   maintainability.
 
 
-[1]: https://web.dev/custom-elements-best-practices/
 
 
 Mixins
@@ -182,11 +182,6 @@ See also:
   - This [MDN article][4] explaining how mixins work.
 
 
-[2]: https://github.com/emccorson/onsen-next-steps/blob/master/esm/util.js
-[3]: https://github.com/emccorson/onsen-next-steps/blob/master/esm/mixins
-[4]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes#mix-ins
-
-
 Shadow DOM
 ----------
 
@@ -307,7 +302,10 @@ See also:
 
   - [Using templates and slots][9] MDN article.
 
-### CSS
+
+CSS
+---
+
 CSS works a bit differently in the Shadow DOM. Custom Elements that use the
 Shadow DOM have their own CSS and are not affected (in general) by global CSS
 rules. In short, this means that the current approach of including the Onsen UI
@@ -322,7 +320,7 @@ be included inline in its template:
     </div>
     <div id="background"></div>
 
-#### CSS Custom Properties
+### CSS Custom Properties
 Global CSS rules do not generally pierce the Shadow DOM, but CSS custom
 properties (CSS variables) _do_ pierce the Shadow DOM. This means we can still
 use global CSS files to apply the Onsen UI themes (the default theme, the dark
@@ -351,7 +349,7 @@ The file should be placed in the HTML by the user:
 
 Other theme files can be called `dark-onsenui.css`, `old-onsenui.css` etc.
 
-#### CSS namespaces
+### CSS namespaces
 One issue with Onsen UI v2 is that the Onsen UI CSS can [cause conflicts][12]
 with the user's own CSS.
 
@@ -395,8 +393,7 @@ The first solution is simpler to implement (no need for a mixin) with a small
 possibility of CSS conflict, whereas the second solution requires a mixin but
 has almost zero possibility of CSS conflict.
 
-
-#### CSS vs. PostCSS
+### CSS vs. PostCSS
 In preparation for the Shadow DOM (and to simplify the Onsen UI build process),
 I have mostly removed any CSS processing with PostCSS from the project. In
 general, it seemed that the added maintenance overhead of using PostCSS was not
@@ -423,8 +420,51 @@ plain JS/CSS:
 
 But this is just my personal preference and I have no strong recommendation.
 
-#### CSS Components project
+### CSS Components project
+The Onsen UI core (the `onsenui` package) is a completely separate project from
+Onsen UI CSS Components (the `onsen-css-components` package). Users who just
+want the styling of Onsen UI can use the CSS components without any requirement
+to use Custom Elements.
 
+TODO
+
+### Icons
+In v2, icons are provided through third-party icon packs such as Ionicons and
+FontAwesome. These icon packs are CSS classes which apply an icon when set on an
+element:
+
+    <div class="ion-ios-hammer"></div>   <--- shows hammer icon
+
+If the user wants to use a different icon pack, she can easily link her own
+icons in the head of HTML and they will work seamlessly with Onsen UI.
+
+Global CSS classes do not apply to elements in the Shadow DOM, so this will not
+work in v3:
+
+    <ons-toolbar-button>
+      #shadow-root
+      <div class="ion-ios-hammer"></div>  <-- this doesn't work
+    </ons-toolbar-button>
+
+However, we can apply global CSS classes to the Custom Element tag since it is
+in the Light DOM:
+
+    <ons-toolbar-button class="ion-ios-hammer">  <-- this works
+      #shadow-root
+      <div></div>
+    </ons-toolbar-button>
+
+In order to allow users to provide their own icons in v3, we should restructure
+the Onsen UI element templates so that they display properly when the icon class
+is applied to the Custom Element itself (e.g. `ons-tab`) instead of some inner
+element (e.g. `div.tabbar__icon`).
+
+
+
+[1]:  https://web.dev/custom-elements-best-practices/
+[2]:  https://github.com/emccorson/onsen-next-steps/blob/master/esm/util.js
+[3]:  https://github.com/emccorson/onsen-next-steps/blob/master/esm/mixins
+[4]:  https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes#mix-ins
 [5]:  https://caniuse.com/custom-elementsv1
 [6]:  https://html.spec.whatwg.org/multipage/custom-elements.html#custom-element-conformance
 [7]:  https://onsen.io/v2/guide/compilation.html#components-compilation
