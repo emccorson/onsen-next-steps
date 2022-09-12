@@ -462,12 +462,12 @@ Onsen UI core.
 
 If it _is_ still important to keep the projects separate, we could:
 
-    - use a plugin like [rollup-plugin-import-css][11] to inject the CSS
-      Components into the Shadow DOM templates in the build process, or...
+  - use a plugin like [rollup-plugin-import-css][11] to inject the CSS
+    Components into the Shadow DOM templates in the build process, or...
 
-    - inline the CSS to Shadow DOM templates and use a plugin to extract the
-      CSS, allowing us to make a separate build of CSS Components from the
-      Onsen UI core.
+  - inline the CSS to Shadow DOM templates and use a plugin to extract the
+    CSS, allowing us to make a separate build of CSS Components from the
+    Onsen UI core.
 
 ### Icons
 In v2, icons are provided through third-party icon packs such as Ionicons and
