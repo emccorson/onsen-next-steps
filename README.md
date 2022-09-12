@@ -2,6 +2,7 @@ Onsen UI next steps
 ===================
 
 1. [Introduction](#introduction)
+   1. [Demo](#demo)
 2. [Mixins](#mixins)
 3. [Shadow DOM](#shadow-dom)
    1. [Custom Elements polyfill](#custom-elements-polyfill)
@@ -58,6 +59,18 @@ In order to fix these problems, I suggest we do the following:
   3. Write the custom elements in a mixin style. This will allow for separation
   of concerns and much easier code re-use, improving consistency for users and
   maintainability.
+
+
+### Demo
+This repo contains a demo showing how to implement the suggestions in this
+document for a small subset of Onsen UI.
+
+To run the demo:
+
+    npm install
+    npm start
+
+Then open http://127.0.0.1:8080/ in your browser.
 
 
 Mixins
@@ -425,7 +438,30 @@ Onsen UI CSS Components (the `onsen-css-components` package). Users who just
 want the styling of Onsen UI can use the CSS components without any requirement
 to use Custom Elements.
 
-TODO
+By moving the CSS into the Shadow DOM templates, Onsen UI CSS Components will no
+longer be an entirely separate project.
+
+I don't have a concrete suggestion for dealing with this yet, but I think we
+should consider:
+
+  - Although CSS Components is a separate project, we never publish CSS
+    Components as its own package to npm; it is always bundled with the onsenui
+    package.
+
+  - How many users are actually using CSS Components without the Onsen UI core?
+
+If we discover that it is not very important to maintain a separate CSS
+Components package, then I think it is fine to merge CSS Components into the
+Onsen UI core.
+
+If it _is_ still important to keep the projects separate, we could:
+
+    - use a plugin like [rollup-plugin-import-css][11] to inject the CSS
+      Components into the Shadow DOM templates in the build process, or...
+
+    - inline the CSS to Shadow DOM templates and use a plugin to extract the
+      CSS, allowing us to make a separate build of CSS Components from the
+      Onsen UI core.
 
 ### Icons
 In v2, icons are provided through third-party icon packs such as Ionicons and
