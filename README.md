@@ -526,7 +526,7 @@ This can make the code quite complicated. I suggest we follow the Vue style:
      by prefixing them with `_` and not publicly documenting them e.g.
      `_active`.
 
-See the demo [tab][14] and [tabbar][15] elements' use of the `_active_` event
+See the demo [tab][14] and [tabbar][15] elements' use of the `_active` event
 for an example implementation.
 
 
