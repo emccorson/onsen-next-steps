@@ -344,34 +344,27 @@ be included inline in its template:
     </div>
     <div id="background"></div>
 
+In the Shadow DOM, we should not use CSS classes for applying styles, instead
+selecting the tag name directly:
+
+    ons-page {    /* instead of `.page` */
+      ...
+    }
+
+This is safe to do because the Shadow DOM rules are local to the Custom Element,
+and will simplify the code because we don't need to use JavaScript to set
+classes.
+
 ### CSS Custom Properties
 Global CSS rules do not generally pierce the Shadow DOM, but CSS custom
 properties (CSS variables) _do_ pierce the Shadow DOM. This means we can still
 use global CSS files to apply the Onsen UI themes (the default theme, the dark
 theme etc.), since a theme is just made of CSS custom properties.
 
-Currently we have two global CSS files:
-
-  1. `onsenui.css`, which contains CSS related to Onsen UI Custom Elements.
-  2. `onsen-css-components.css`, which contains the CSS from the CSS components
-     project. If the user wants a different theme, he subsitutes a different
-     file e.g. `dark-onsen-css-components.css` for the dark theme.
-
 My suggestion is to take all the CSS _custom properties_ from `onsenui.css` and
 `onsen-css-components.css` and put them in one file (we can still call it
-`onsenui.css`).
-
-The file should be placed in the HTML by the user:
-
-    <html>
-      <head>
-        <link rel="stylesheet" href="onsenui.css" />   <--- just one file now
-        ...
-      </head>
-      ...
-    </html>
-
-Other theme files can be called `dark-onsenui.css`, `old-onsenui.css` etc.
+`onsenui.css`). And we can still have separate files for different themes e.g.
+`dark-onsenui.css` for the dark theme.
 
 ### CSS namespaces
 One issue with Onsen UI v2 is that the Onsen UI CSS can [cause conflicts][12]
