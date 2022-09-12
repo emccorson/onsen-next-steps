@@ -9,6 +9,7 @@ Onsen UI next steps
    2. [`contentReady`](#contentready)
    3. [Shadow DOM and templates](#shadow-dom-and-templates)
    4. [Slots](#slots)
+   5. [`slotchange` event](#slotchange-event)
 4. [CSS](#css)
    1. [CSS Custom Properties](#css-custom-properties)
    2. [CSS namespaces](#css-namespaces)
@@ -314,6 +315,17 @@ See also:
 
   - [Using templates and slots][9] MDN article.
 
+### `slotchange` event
+Sometimes we will need to do some action when an element's children have
+changed. For this we can use the `slotchange` event.
+
+In v3, this will fill the same role that the `contentReady` function filled in
+v2, except that since the elements are dynamic, `slotchange` may be called
+multiple times, so we should write the code in a way that accounts for this.
+
+See also:
+
+  - [`slotchange` event][13] on MDN.
 
 CSS
 ---
@@ -508,3 +520,4 @@ element (e.g. `div.tabbar__icon`).
 [10]: https://github.com/OnsenUI/OnsenUI/issues/2598
 [11]: https://github.com/jleeson/rollup-plugin-import-css
 [12]: https://github.com/OnsenUI/OnsenUI/issues/2645
+[13]: https://developer.mozilla.org/en-US/docs/Web/API/HTMLSlotElement/slotchange_event
