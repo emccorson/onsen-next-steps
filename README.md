@@ -307,6 +307,80 @@ be included inline in its template:
     </div>
     <div id="background"></div>
 
+#### CSS Custom Properties
+Global CSS rules do not generally pierce the Shadow DOM, but CSS custom
+properties (CSS variables) _do_ pierce the Shadow DOM. This means we can still
+use global CSS files to apply the Onsen UI themes (the default theme, the dark
+theme etc.), since a theme is just made of CSS custom properties.
+
+Currently we have two global CSS files:
+
+  1. `onsenui.css`, which contains CSS related to Onsen UI Custom Elements.
+  2. `onsen-css-components.css`, which contains the CSS from the CSS components
+     project. If the user wants a different theme, he subsitutes a different
+     file e.g. `dark-onsen-css-components.css` for the dark theme.
+
+My suggestion is to take all the CSS _custom properties_ from `onsenui.css` and
+`onsen-css-components.css` and put them in one file (we can still call it
+`onsenui.css`).
+
+The file should be placed in the HTML by the user:
+
+    <html>
+      <head>
+        <link rel="stylesheet" href="onsenui.css" />   <--- just one file now
+        ...
+      </head>
+      ...
+    </html>
+
+Other theme files can be called `dark-onsenui.css`, `old-onsenui.css` etc.
+
+#### CSS Namespaces
+One issue with Onsen UI v2 is that the Onsen UI CSS can [cause conflicts][12]
+with the user's own CSS.
+
+With most CSS moved inline to the Shadow DOM templates, we have almost
+completely solved the problem of CSS conflicts with the user's own CSS rules.
+The only remaining global CSS is the CSS custom properties (variables), which I
+suggested above should be loaded as a file `onsenui.css`.
+
+In v2, the CSS custom properties are defined globally like this:
+
+    :root {
+      --background-color: #efeff4;
+      --text-color: #1f1f21;
+      --sub-text-color: #999;
+      --highlight-color-rgb: 0, 118, 255;
+      ...
+    }
+
+One possible fix is to prefix all custom properties with `ons-`:
+
+    :root {
+      --ons-background-color: #efeff4;        <--- custom property is prefixed
+      --ons-text-color: #1f1f21;
+      --ons-sub-text-color: #999;
+      --ons-highlight-color-rgb: 0, 118, 255;
+      ...
+    }
+
+Alternatively, we could set an attribute `onsenui` on all Onsen UI elements
+(using a mixin), and use that as the CSS selector:
+
+    [onsenui] {                <--- only elements with onsenui attribute match
+      --background-color: #efeff4;
+      --text-color: #1f1f21;
+      --sub-text-color: #999;
+      --highlight-color-rgb: 0, 118, 255;
+      ...
+    }
+
+The first solution is simpler to implement (no need for a mixin) with a small
+possibility of CSS conflict, whereas the second solution requires a mixin but
+has almost zero possibility of CSS conflict.
+
+
 #### CSS vs. PostCSS
 In preparation for the Shadow DOM (and to simplify the Onsen UI build process),
 I have mostly removed any CSS processing with PostCSS from the project. In
@@ -341,3 +415,4 @@ But this is just my personal preference and I have no strong recommendation.
 [9]:  https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_templates_and_slots
 [10]: https://github.com/OnsenUI/OnsenUI/issues/2598
 [11]: https://github.com/jleeson/rollup-plugin-import-css
+[12]: https://github.com/OnsenUI/OnsenUI/issues/2645
