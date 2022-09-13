@@ -45,7 +45,7 @@ export default `
 }
 
 /* .toolbar__left { */
-::part(left) {
+#left {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
@@ -61,7 +61,7 @@ export default `
 }
 
 /* .toolbar__right { */
-::part(right) {
+#right {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
@@ -77,7 +77,7 @@ export default `
 }
 
 /* .toolbar__center { */
-::part(center) {
+#center {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
@@ -94,7 +94,7 @@ export default `
 }
 
 /* .toolbar__title { */
-::part(center) {
+#center {
   line-height: var(--toolbar-height);
   font-size: var(--font-size);
   font-weight: var(--font-weight--large);
@@ -124,8 +124,8 @@ export default `
 }
 
 /* .toolbar--material__left, .toolbar--material__right { */
-:host([modifier~="material"])::part(left),
-:host([modifier~="material"])::part(right) {
+:host([modifier~="material"]) #left,
+:host([modifier~="material"]) #right {
   font-family: 'Roboto', 'Noto', sans-serif;
   -webkit-font-smoothing: antialiased;
   font-size: 20px;
@@ -139,7 +139,7 @@ export default `
 }
 
 /* .toolbar--material__center { */
-:host([modifier~="material"])::part(center) {
+:host([modifier~="material"]) #center {
   font-family: 'Roboto', 'Noto', sans-serif;
   -webkit-font-smoothing: antialiased;
   font-size: 20px;

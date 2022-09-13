@@ -35,7 +35,7 @@ export default `
 }
 
 /* .tabbar__button { */
-::part(button) {
+#button {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
@@ -71,7 +71,7 @@ export default `
 /* @media (--retina-query) */
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) {
   /* .tabbar__button { */
-  ::part(button) {
+  #button {
     border-top: none;
   }
 }
@@ -131,7 +131,7 @@ export default `
 */
 
 /* :checked + .tabbar__button { */
-:host([active])::part(button) {
+:host([active]) #button {
   color: var(--tabbar-active-color);
   background-color: transparent;
   box-shadow: var(--tabbar-active-box-shadow);
@@ -139,7 +139,7 @@ export default `
 }
 
 /* .tabbar__button:focus { */
-::part(button):focus {
+#button:focus {
   z-index: 1;
   border-top: var(--tabbar-focus-border-top);
   box-shadow: var(--tabbar-button-focus-box-shadow);
@@ -147,7 +147,7 @@ export default `
 }
 
 /* .tabbar--material__button { */
-:host([modifier~="material"])::part(button) {
+:host([modifier~="material"]) #button {
   background-color: transparent;
   color: var(--material-tabbar-text-color);
   text-transform: uppercase;
@@ -160,7 +160,7 @@ export default `
 }
 
 /* .tabbar--material__button:after { */
-:host([modifier~="material"])::part(button):after {
+:host([modifier~="material"]) #button:after {
   content: '';
   display: block;
   width: 0;
@@ -172,13 +172,13 @@ export default `
 }
 
 /* :checked + .tabbar--material__button:after { */
-:host([modifier~="material"]):host([active])::part(button):after {
+:host([modifier~="material"]):host([active]) #button:after {
   width: 100%;
   transition: width 0.2s ease-in-out;
 }
 
 /* :checked + .tabbar--material__button { */
-:host([modifier~="material"]):host([active])::part(button) {
+:host([modifier~="material"]):host([active]) #button {
   background-color: transparent;
   color: var(--material-tabbar-current-color);
 }

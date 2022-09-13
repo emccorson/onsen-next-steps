@@ -12,7 +12,7 @@ const template = document.createElement('template');
 template.innerHTML = `
   <style>${css}</style>
   <input id="input" type="radio" hidden></input>
-  <button part="button">
+  <button id="button" part="button">
     <div id="label"></div>
   </button>
 `;

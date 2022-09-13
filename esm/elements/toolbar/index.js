@@ -7,14 +7,14 @@ import css from './css.js';
 const template = document.createElement('template');
 template.innerHTML = `
   <style>${css}</style>
-  <div part="left">
+  <div id="left" part="left">
     <slot name="left"></slot>
   </div>
-  <div part="center">
+  <div id="center" part="center">
     <slot name="center"></slot>
     <slot></slot>
   </div>
-  <div part="right">
+  <div id="right" part="right">
     <slot name="right"></slot>
   </div>
 `;

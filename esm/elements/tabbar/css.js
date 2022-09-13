@@ -1,7 +1,7 @@
 export default `
 
 /* .tabbar { */
-::part(footer) {
+#footer {
   font-family: -apple-system, 'Helvetica Neue', 'Helvetica', 'Arial', 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -23,7 +23,7 @@ export default `
 
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) {
   /* .tabbar { */
-  ::part(footer) {
+  #footer {
     border-top: none;
     background-size: 100% 1px;
     background-repeat: no-repeat;
@@ -33,7 +33,7 @@ export default `
 }
 
 /* .tabbar__content { */
-::part(content) {
+#content {
   position: absolute;
   top: 0;
   left: 0;
@@ -43,7 +43,7 @@ export default `
 }
 
 /* .tabbar--material { */
-:host([modifier~="material"])::part(footer) {
+:host([modifier~="material"]) #footer {
   background: none;
   background-color: var(--material-tabbar-background-color);
   border-bottom-width: 0;

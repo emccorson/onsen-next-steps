@@ -28,7 +28,7 @@ export default `
 }
 
 /* .page__content { */
-::part(content) {
+#content {
   background-color: var(--page-background-color);
   position: absolute;
   top: 0;
@@ -39,7 +39,7 @@ export default `
 }
 
 /* .page__background { */
-::part(background) {
+#background {
   background-color: var(--page-background-color);
   position: absolute;
   top: 0;
@@ -59,7 +59,7 @@ export default `
 }
 
 /* .page--material__content { */
-:host([modifier~="material"])::part(content) {
+:host([modifier~="material"]) #content {
   font-family: 'Roboto', 'Noto', sans-serif;
   -webkit-font-smoothing: antialiased;
 
@@ -67,7 +67,7 @@ export default `
 }
 
 /* .page--material__background { */
-:host([modifier~="material"])::part(background) {
+:host([modifier~="material"]) #background {
   background-color: var(--page-material-background-color);
 }
 
